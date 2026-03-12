@@ -1,0 +1,8 @@
+[project]
+name = "django-skeleton"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "django>=5.0",
+    "djangorestframework>=3.15",
+]
