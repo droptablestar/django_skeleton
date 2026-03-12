@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>{{ post.title }}</title></head>
+<body>
+  <h1>{{ post.title }}</h1>
+  {% if post.published_at %}<p><em>Published {{ post.published_at|date:"N j, Y" }}</em></p>{% endif %}
+  <div>{{ post.body|linebreaks }}</div>
+
+  {% if related_posts %}
+    <h2>Related Posts</h2>
+    <ul>
+      {% for related in related_posts %}
+        <li><a href="{% url 'posts:detail' related.pk %}">{{ related.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <p><a href="{% url 'posts:list' %}">Back to all posts</a></p>
+</body>
+</html>
