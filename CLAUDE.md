@@ -4,29 +4,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
+### Docker (primary)
 ```bash
-# Install dependencies
-uv sync
+# Build and start all services (MySQL + Django)
+docker-compose up --build
 
-# Run dev server
-uv run manage.py runserver
+# Run migrations inside the container
+docker-compose exec web uv run manage.py migrate
 
-# Run migrations
-uv run manage.py migrate
+# Create a superuser
+docker-compose exec web uv run manage.py createsuperuser
 
-# Create migrations after model changes
-uv run manage.py makemigrations
-
-# Run all tests
-uv run manage.py test
-
-# Run tests for a specific app
-uv run manage.py test items
+# Run tests
+docker-compose exec web uv run manage.py test
 
 # Run a single test
-uv run manage.py test items.tests.MyTestClass.test_method
+docker-compose exec web uv run manage.py test items.tests.MyTestClass.test_method
+```
 
-# Django system check
+### Local (no Docker)
+```bash
+uv sync
+uv run manage.py runserver
+uv run manage.py migrate
+uv run manage.py makemigrations
 uv run manage.py check
 ```
 
